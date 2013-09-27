@@ -5,8 +5,6 @@
 package edu.cmu.deiis.annotators;
 
 import java.util.Iterator;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.cas.FSIndex;
@@ -86,9 +84,6 @@ public class AnswerScoreAnnotator extends JCasAnnotator_ImplBase {
       // calculate score
       score.setScore((((double) matchUni + (double) matchBi + (double) matchTri) / ((double) numUni
               + (double) numBi + (double) numTri)));
-      // score.setScore((((double) matchUni / (double) numUni) + ((double) matchBi / (double) numBi)
-      // +
-      // ((double) matchTri / (double) numTri)) / 3.0);
       // add score to indexes and iterate
       score.addToIndexes();
     }

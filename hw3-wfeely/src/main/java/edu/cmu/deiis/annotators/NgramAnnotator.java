@@ -5,14 +5,11 @@
 package edu.cmu.deiis.annotators;
 
 import java.util.Iterator;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.cas.FSIndex;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
-import org.apache.uima.tutorial.RoomNumber;
 
 import edu.cmu.deiis.types.*;
 
@@ -59,7 +56,6 @@ public class NgramAnnotator extends JCasAnnotator_ImplBase {
           bigram.setBegin(penult.getBegin());
           bigram.setEnd(token.getEnd());
           bigram.setSentenceId(token.getSentenceId());
-          bigram.setCoveredText(penult.getCoveredText() + " " + token.getCoveredText());
           // add bigram to indexes
           bigram.addToIndexes();
         }
@@ -82,7 +78,6 @@ public class NgramAnnotator extends JCasAnnotator_ImplBase {
           bigram.setBegin(penult.getBegin());
           bigram.setEnd(token.getEnd());
           bigram.setSentenceId(token.getSentenceId());
-          bigram.setCoveredText(penult.getCoveredText() + " " + token.getCoveredText());
           // add bigram to indexes
           bigram.addToIndexes();
         }
@@ -102,8 +97,6 @@ public class NgramAnnotator extends JCasAnnotator_ImplBase {
           trigram.setBegin(antepenult.getBegin());
           trigram.setEnd(token.getEnd());
           trigram.setSentenceId(token.getSentenceId());
-          trigram.setCoveredText(antepenult.getCoveredText() + " " + penult.getCoveredText() + " "
-                  + token.getCoveredText());
           // add trigram to indexes
           trigram.addToIndexes();
         }
@@ -122,7 +115,6 @@ public class NgramAnnotator extends JCasAnnotator_ImplBase {
       unigram.setBegin(token.getBegin());
       unigram.setEnd(token.getEnd());
       unigram.setSentenceId(token.getSentenceId());
-      unigram.setCoveredText(token.getCoveredText());
       // add unigram to indexes
       unigram.addToIndexes();
     }

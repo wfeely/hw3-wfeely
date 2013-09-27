@@ -12,7 +12,6 @@ import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.cas.FSIndex;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
-import org.apache.uima.jcas.cas.FSList;
 
 import edu.cmu.deiis.types.*;
 
@@ -36,7 +35,6 @@ public class AnswerAnnotator extends JCasAnnotator_ImplBase {
       Answer answer = new Answer(aJCas);
       answer.setBegin(matcher.start());
       answer.setEnd(matcher.end());
-      answer.setCoveredText(text.substring(answer.getBegin() + 4, answer.getEnd()+1));
       // get number of words in answer string (-2 for "A" and "0/1")
       int numWords = matcher.group().split(" ").length - 2;
       // get answer key

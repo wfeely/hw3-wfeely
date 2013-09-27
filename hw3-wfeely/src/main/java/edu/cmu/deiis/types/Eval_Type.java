@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** Evaluation type for ranking of answers and calculating precision @ N.
- * Updated by JCasGen Fri Sep 27 14:05:31 EDT 2013
+ * Updated by JCasGen Fri Sep 27 14:12:25 EDT 2013
  * @generated */
 public class Eval_Type extends Annotation_Type {
   /** @generated */

@@ -33,7 +33,6 @@ public class QuestionAnnotator extends JCasAnnotator_ImplBase {
       Question question = new Question(aJCas);
       question.setBegin(matcher.start());
       question.setEnd(matcher.end());
-      question.setCoveredText(text.substring(question.getBegin() + 2, question.getEnd()+1));
       // get number of words in question string (-1 for "Q")
       int numWords = matcher.group().split(" ").length - 1;
       // add ngrams to question

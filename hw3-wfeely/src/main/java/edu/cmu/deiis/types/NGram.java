@@ -11,7 +11,7 @@ import org.apache.uima.jcas.cas.FSArray;
 
 
 /** 
- * Updated by JCasGen Fri Sep 27 14:05:31 EDT 2013
+ * Updated by JCasGen Fri Sep 27 14:12:25 EDT 2013
  * XML source: /home/hermes/git/hw3-wfeely/hw3-wfeely/src/main/resources/descriptors/deiis_types.xml
  * @generated */
 public class NGram extends Annotation {
@@ -148,24 +148,6 @@ public class NGram extends Annotation {
     if (NGram_Type.featOkTst && ((NGram_Type)jcasType).casFeat_order == null)
       jcasType.jcas.throwFeatMissing("order", "edu.cmu.deiis.types.NGram");
     jcasType.ll_cas.ll_setIntValue(addr, ((NGram_Type)jcasType).casFeatCode_order, v);}    
-   
-    
-  //*--------------*
-  //* Feature: coveredText
-
-  /** getter for coveredText - gets Covered text from document span, for this ngram.
-   * @generated */
-  public String getCoveredText() {
-    if (NGram_Type.featOkTst && ((NGram_Type)jcasType).casFeat_coveredText == null)
-      jcasType.jcas.throwFeatMissing("coveredText", "edu.cmu.deiis.types.NGram");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((NGram_Type)jcasType).casFeatCode_coveredText);}
-    
-  /** setter for coveredText - sets Covered text from document span, for this ngram. 
-   * @generated */
-  public void setCoveredText(String v) {
-    if (NGram_Type.featOkTst && ((NGram_Type)jcasType).casFeat_coveredText == null)
-      jcasType.jcas.throwFeatMissing("coveredText", "edu.cmu.deiis.types.NGram");
-    jcasType.ll_cas.ll_setStringValue(addr, ((NGram_Type)jcasType).casFeatCode_coveredText, v);}    
   }
 
     
