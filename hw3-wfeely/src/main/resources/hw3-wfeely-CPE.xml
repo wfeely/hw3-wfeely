@@ -45,6 +45,14 @@
                 <timeout max="100000" default="-1"/>
             </errorHandling>
             <checkpoint batch="10000" time="1000ms"/>
+            <configurationParameterSettings>
+                <nameValuePair>
+                    <name>OutputDirectory</name>
+                    <value>
+                        <string>/home/hermes/git/hw3-wfeely/hw3-wfeely/src/main/resources/output</string>
+                    </value>
+                </nameValuePair>
+            </configurationParameterSettings>
         </casProcessor>
     </casProcessors>
     <cpeConfig>
