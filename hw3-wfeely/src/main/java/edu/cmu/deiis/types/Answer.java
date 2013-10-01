@@ -13,8 +13,8 @@ import org.apache.uima.jcas.cas.FSArray;
 
 
 /** 
- * Updated by JCasGen Fri Sep 27 14:12:25 EDT 2013
- * XML source: /home/hermes/git/hw3-wfeely/hw3-wfeely/src/main/resources/descriptors/deiis_types.xml
+ * Updated by JCasGen Mon Sep 30 19:58:21 EDT 2013
+ * XML source: /home/hermes/git/hw3-wfeely/hw3-wfeely/src/main/resources/descriptors/EvaluationCasConsumer.xml
  * @generated */
 public class Answer extends Annotation {
   /** @generated
