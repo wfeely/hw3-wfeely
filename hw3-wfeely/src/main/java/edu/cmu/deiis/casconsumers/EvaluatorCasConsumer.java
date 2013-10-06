@@ -4,7 +4,6 @@
 
 package edu.cmu.deiis.casconsumers;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,31 +24,17 @@ import edu.cmu.deiis.types.Question;
  * A simple CAS consumer that prints the results tables and precision at N for each CAS.
  */
 public class EvaluatorCasConsumer extends CasConsumer_ImplBase {
-  /**
-   * Name of configuration parameter that must be set to the path of a directory into which the
-   * output files will be written.
-   */
-  public static final String PARAM_OUTPUTDIR = "OutputDirectory";
 
-  private File mOutputDir;
-
-  private int mDocNum;
-  
   private double totalPrecision = 0.0;
-  
+
   private int numCases = 0;
 
   /**
    * Initializes the CAS consumer.
    */
   public void initialize() throws ResourceInitializationException {
-    mDocNum = 0;
-    mOutputDir = new File((String) getConfigParameterValue(PARAM_OUTPUTDIR));
-    if (!mOutputDir.exists()) {
-      mOutputDir.mkdirs();
-    }
   }
- 
+
   /**
    * Processes the CAS to rank answer scores, calculate precision at N, and print precision at N
    * with results tables to console.
@@ -136,11 +121,12 @@ public class EvaluatorCasConsumer extends CasConsumer_ImplBase {
     totalPrecision += precisionAtN;
     numCases++;
   }
-  
+
   /**
    * Prints the average precision at the end of a batch of CASes.
    */
-  public void collectionProcessComplete(ProcessTrace arg0) throws ResourceProcessException, IOException {
-    System.out.println("Average Precision: " + (totalPrecision/numCases) + "\n");
+  public void collectionProcessComplete(ProcessTrace arg0) throws ResourceProcessException,
+          IOException {
+    System.out.println("Average Precision: " + (totalPrecision / numCases) + "\n");
   }
 }

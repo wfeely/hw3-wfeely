@@ -29,27 +29,16 @@
     <version>1.0</version>
     <vendor>Weston Feely</vendor>
     <configurationParameters>
-      <configurationParameter>
-        <name>OutputDirectory</name>
-        <description>Directory where the XMI files will be written</description>
-        <type>String</type>
-        <multiValued>false</multiValued>
-        <mandatory>true</mandatory>
-      </configurationParameter>
-    </configurationParameters>
+      </configurationParameters>
     <configurationParameterSettings>
-      <nameValuePair>
-        <name>OutputDirectory</name>
-        <value>
-          <string>temp-uima-output/xmi_output</string>
-        </value>
-      </nameValuePair>
-    </configurationParameterSettings>
+      </configurationParameterSettings>
     <typeSystemDescription>
       <imports>
         <import name="org.apache.uima.examples.SourceDocumentInformation"/>
       </imports>
     </typeSystemDescription>
+    <typePriorities/>
+    <fsIndexCollection/>
     <capabilities>
       <capability>
         <inputs>
@@ -65,4 +54,5 @@
 	  <outputsNewCASes>false</outputsNewCASes>	
     </operationalProperties>
   </processingResourceMetaData>
+<resourceManagerConfiguration/>
 </casConsumerDescription>
