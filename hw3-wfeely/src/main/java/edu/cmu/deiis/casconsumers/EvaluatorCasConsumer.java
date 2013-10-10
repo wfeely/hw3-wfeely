@@ -16,8 +16,10 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceProcessException;
 import org.apache.uima.util.ProcessTrace;
+import org.cleartk.ne.type.NamedEntityMention;
 
 import edu.cmu.deiis.types.AnswerScore;
+import edu.cmu.deiis.types.NGram;
 import edu.cmu.deiis.types.Question;
 
 /**
@@ -60,6 +62,21 @@ public class EvaluatorCasConsumer extends CasConsumer_ImplBase {
     Question question = null;
     while (questionIter.hasNext())
       question = (Question) questionIter.next();
+    // HW3: get named entities in question span
+    ArrayList<NamedEntityMention> questionNamedEntities = new ArrayList<NamedEntityMention>();
+    FSIndex neQuestionIndex = aJCas.getAnnotationIndex(NamedEntityMention.type);
+    Iterator neQuestionIter = neQuestionIndex.iterator();
+    while (neQuestionIter.hasNext()) {
+      NamedEntityMention ne = (NamedEntityMention) neQuestionIter.next();
+      // make sure named entity is within the span of the answer and its type isn't null      
+      if ((ne.getBegin() >= question.getBegin()) && (ne.getEnd() <= question.getEnd())
+              && (ne.getMentionType() != null))
+        questionNamedEntities.add(ne);
+    }
+    // HW3: check to see if the question has any named entities at all
+    boolean namedEntityFlag = true;
+    if ((int) questionNamedEntities.size() == 0)
+      namedEntityFlag = false;
     // get answer scores
     FSIndex answerScoreIndex = aJCas.getAnnotationIndex(AnswerScore.type);
     // initialize N (number of correct answers)
@@ -78,6 +95,39 @@ public class EvaluatorCasConsumer extends CasConsumer_ImplBase {
         N++;
       // put answerScores into an arrayList
       answerScores.add(answerScore);
+    }
+    // HW3: adjust scores in each answerScore object, based on matching named entities
+    if (namedEntityFlag) {
+      for (AnswerScore answerScore : answerScores) {
+        // get named entity mentions for this answer
+        ArrayList<NamedEntityMention> answerNamedEntities = new ArrayList<NamedEntityMention>();
+        FSIndex neAnswerIndex = aJCas.getAnnotationIndex(NamedEntityMention.type);
+        Iterator neAnswerIter = neAnswerIndex.iterator();
+        while (neAnswerIter.hasNext()) {
+          NamedEntityMention ne = (NamedEntityMention) neAnswerIter.next();
+          // make sure named entity is within the span of the answer and its type isn't null
+          if ((ne.getBegin() >= answerScore.getBegin()) && (ne.getEnd() <= answerScore.getEnd())
+                  && (ne.getMentionType() != null))
+            answerNamedEntities.add(ne);
+        }
+        // compare named entity mentions for question and this answer
+        int matchNE = 0;
+        for (int i = 0; i < questionNamedEntities.size(); i++) {
+          for (int j = 0; j < answerNamedEntities.size(); j++) {
+            NamedEntityMention qNE = (NamedEntityMention) questionNamedEntities.get(i);
+            NamedEntityMention aNE = (NamedEntityMention) answerNamedEntities.get(j);
+            if (qNE.getCoveredText().equals(aNE.getCoveredText())) {
+              // increment matching named entities count
+              matchNE++;
+              System.out.println(qNE.getCoveredText());
+            }
+          }
+        }
+        // adjust score for this answer score, weighting named entity matches by 1/4
+        double ngramScore = 0.75 * answerScore.getScore();
+        double neScore = 0.25 * ((double) matchNE / (double) questionNamedEntities.size());
+        answerScore.setScore(ngramScore + neScore);
+      }
     }
     // sort answerScores arrayList
     for (int i = 0; i < ranking.length; i++) {
