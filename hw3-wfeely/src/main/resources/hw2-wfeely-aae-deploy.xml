@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<analysisEngineDeploymentDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <name>Deployment AAE for HW2</name>
+  <description>Deploys HW2 AAE, modified for this assignment.</description>
+  <version/>
+  <vendor/>
+  <deployment protocol="jms" provider="activemq">
+    <casPool numberOfCASes="1" initialFsHeapSize="2000000"/>
+    <service>
+      <inputQueue endpoint="Hw2AAEQueue" brokerURL="tcp://ubuntu:61616" prefetch="0"/>
+      <topDescriptor>
+<import location="./hw2-wfeely-aae.xml"/>
+      </topDescriptor>
+      <analysisEngine async="false">
+        <scaleout numberOfInstances="1"/>
+        <asyncPrimitiveErrorConfiguration>
+          <processCasErrors thresholdCount="0" thresholdWindow="0" thresholdAction="terminate"/>
+          <collectionProcessCompleteErrors timeout="0" additionalErrorAction="terminate"/>
+        </asyncPrimitiveErrorConfiguration>
+      </analysisEngine>
+    </service>
+  </deployment>
+</analysisEngineDeploymentDescription>
