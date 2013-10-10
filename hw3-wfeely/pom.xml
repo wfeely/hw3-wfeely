@@ -85,4 +85,8 @@
 			<version>2.4.0</version>
 		</dependency>
 	</dependencies>
+	<scm>
+		<connection>scm:git:git@github.com:wfeely/hw3-wfeely.git</connection>
+		<developerConnection>scm:git:git@github.com:wfeely/hw3-wfeely.git</developerConnection>
+	</scm>
 </project>
