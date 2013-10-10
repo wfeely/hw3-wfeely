@@ -119,7 +119,6 @@ public class EvaluatorCasConsumer extends CasConsumer_ImplBase {
             if (qNE.getCoveredText().equals(aNE.getCoveredText())) {
               // increment matching named entities count
               matchNE++;
-              System.out.println(qNE.getCoveredText());
             }
           }
         }
